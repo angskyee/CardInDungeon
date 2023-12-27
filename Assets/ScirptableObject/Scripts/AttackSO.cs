@@ -7,8 +7,14 @@ using UnityEngine;
 public class AttackSO : ScriptableObject
 {
     [Header("Attack Info")]
-    public float power;
+    public int power;
     public float speed;
     public int distance;
     public LayerMask target;
+    
+    [Header("Knock Back Info")]
+    public bool isOnKnockback;
+    public float knockbackPower;
+    public float knockbackTime;
+
 }

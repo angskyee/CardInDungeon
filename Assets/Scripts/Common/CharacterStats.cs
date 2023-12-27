@@ -16,7 +16,5 @@ public class CharacterStats
     public StatsChangeType statsChangeType;
     [Range(0, 100)] public int maxHealth;
     [Range(0, 100)] public int maxArmor;
-    [Range(0, 100)] public int distance;
-    public bool turn;
     public AttackSO attackSO;
 }

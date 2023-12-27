@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 512761641}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,9 +263,12 @@ GameObject:
   - component: {fileID: 564218530}
   - component: {fileID: 564218529}
   - component: {fileID: 564218532}
-  m_Layer: 0
+  - component: {fileID: 564218536}
+  - component: {fileID: 564218535}
+  - component: {fileID: 564218534}
+  m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -315,7 +318,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -344,7 +347,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 5
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -428,8 +431,6 @@ MonoBehaviour:
     statsChangeType: 0
     maxHealth: 10
     maxArmor: 0
-    distance: 0
-    turn: 0
     attackSO: {fileID: 11400000, guid: dfff95235bd9544498c6fd00d6234c50, type: 2}
   statsModifiers: []
 --- !u!58 &564218533
@@ -461,12 +462,48 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.75
+--- !u!114 &564218534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564218525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff0d299b47b544207993b14b98c559ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &564218535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564218525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97a04b09c920c472d9e7a80ef6d36946, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &564218536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564218525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab9b82aa6770b4bc89e80f6fcf7b4930, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &600186537
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,7 +514,7 @@ GameObject:
   m_Component:
   - component: {fileID: 600186538}
   - component: {fileID: 600186539}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CharacterCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -564,9 +601,10 @@ GameObject:
   - component: {fileID: 811254779}
   - component: {fileID: 811254778}
   - component: {fileID: 811254777}
-  m_Layer: 0
+  - component: {fileID: 811254782}
+  m_Layer: 7
   m_Name: Slime
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -587,9 +625,7 @@ MonoBehaviour:
     statsChangeType: 0
     maxHealth: 5
     maxArmor: 0
-    distance: 0
-    turn: 0
-    attackSO: {fileID: 11400000, guid: dfff95235bd9544498c6fd00d6234c50, type: 2}
+    attackSO: {fileID: 11400000, guid: 76c0f421b3e9a4a988d3c50795d607b5, type: 2}
   statsModifiers: []
 --- !u!58 &811254778
 CircleCollider2D:
@@ -620,7 +656,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -655,7 +691,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -714,6 +750,18 @@ Transform:
   - {fileID: 1021146735}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &811254782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 811254776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff0d299b47b544207993b14b98c559ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &813201650
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,7 +772,7 @@ GameObject:
   m_Component:
   - component: {fileID: 813201651}
   - component: {fileID: 813201652}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CharacterCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -807,7 +855,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1021146735}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -889,7 +937,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 2.5, y: 1.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1140696931}
@@ -935,7 +983,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: bea5ef0933314436a80f0b4a456ac69d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 490856b2d18c943afbb8124e34870e36, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

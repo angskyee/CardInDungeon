@@ -6,23 +6,17 @@ using UnityEngine.Events;
 
 public class HealthSystem : MonoBehaviour
 {
-    private bool healthChange;
     private CharacterStatsHandler _statsHandler;
 
     public event Action OnDamage;
     public event Action OnHeal;
     public event Action OnDeath;
-    public event Action OnInvincibilityEnd;
-
+    
     public int CurrentHealth { get; private set; }
     public int CurrentMaxArmor { get; private set; }
-    public int CurrentDistance { get; private set; }
-    public bool CurrentTurn { get; private set; }
 
     public int MaxHealth => _statsHandler.CurrentStats.maxHealth;
     public int MaxArmor => _statsHandler.CurrentStats.maxArmor;
-    public int Distance => _statsHandler.CurrentStats.distance;
-    public bool Turn => _statsHandler.CurrentStats.turn;
 
     private void Awake()
     {
@@ -33,29 +27,23 @@ public class HealthSystem : MonoBehaviour
     {
         CurrentHealth = _statsHandler.CurrentStats.maxHealth;
         CurrentMaxArmor = _statsHandler.CurrentStats.maxArmor;
-        CurrentDistance = _statsHandler.CurrentStats.distance;
-        CurrentTurn = _statsHandler.CurrentStats.turn;
-    }
-
-    private void Update()
-    {
-        if(healthChange == true)
-            OnInvincibilityEnd?.Invoke();
     }
 
     public bool ChangeHealth(int change)
     {
-        if (change == 0 || healthChange != true)
+        Debug.Log(change);
+        Debug.Log(CurrentHealth);
+        
+        if (change == 0)
         {
             return false;
         }
-
-        healthChange = false;
         
-        CurrentHealth += change;
+        CurrentHealth += (change - MaxArmor);
         CurrentHealth = CurrentHealth > MaxHealth ? MaxHealth : CurrentHealth;
         CurrentHealth = CurrentHealth < 0 ? 0 : CurrentHealth;
-
+        
+        Debug.Log("changedHealth"+CurrentHealth);
         if (change > 0)
         {
             OnHeal?.Invoke();
@@ -69,7 +57,7 @@ public class HealthSystem : MonoBehaviour
         {
             CallDeath();
         }
-
+        
         return true;
     }
 
