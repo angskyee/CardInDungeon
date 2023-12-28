@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,9 +11,20 @@ public class ItemSlotUI : MonoBehaviour
     public SpriteRenderer icon;
     public TextMeshPro quatityText;
     private ItemSlot curSlot;
-
-    public int index;
+    private PlayerMovement _movement;
+    
     public bool equipped;
+
+    private void Awake()
+    {
+        _movement = GetComponent<PlayerMovement>();
+    }
+
+    private void Start()
+    {
+        _movement.OnEquipItemEvent += PlayerContactItem;
+    }
+
     public void Set(ItemSlot slot)
     {
         curSlot = slot;
@@ -28,8 +40,8 @@ public class ItemSlotUI : MonoBehaviour
         icon.gameObject.SetActive(false);
     }
 
-    public void PlayerContactItem()
+    public void PlayerContactItem(int value)
     {
-        Inventory.instance.SelectItem(index);
+        Inventory.instance.SelectItem(value);
     }
 }

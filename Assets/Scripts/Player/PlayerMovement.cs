@@ -9,6 +9,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public event Action<int> OnEquipItemEvent;
+    
     private PlayerController _controller;
     private PlayerContactCardController _contact;
     private GameObject _gameObject;
@@ -48,15 +50,16 @@ public class PlayerMovement : MonoBehaviour
 
             if (instanceCharacter.activeSelf)
             {
-                Vector2[] LayerDirection = new Vector2[4];
+                Vector2[] LayerDirection = new Vector2[5];
                 LayerDirection[0] = new Vector2(direction.x, direction.y + 0.5f);
                 LayerDirection[1] = new Vector2(direction.x, direction.y + -0.5f);
                 LayerDirection[2] = new Vector2(direction.x + 0.5f, direction.y);
                 LayerDirection[3] = new Vector2(direction.x - 0.5f, direction.y);
+                LayerDirection[4] = new Vector2(direction.x, direction.y);
 
-                RaycastHit2D[] raycastHit2Ds = new RaycastHit2D[4];
-                int[] layers = new int[4];
-                for (int i = 0; i < 4; i++)
+                RaycastHit2D[] raycastHit2Ds = new RaycastHit2D[LayerDirection.Length];
+                int[] layers = new int[LayerDirection.Length];
+                for (int i = 0; i < LayerDirection.Length; i++)
                 {
                     raycastHit2Ds[i] = Physics2D.Raycast(LayerDirection[i], Vector2.zero, 0f);
                     if (raycastHit2Ds[i].collider != null)
@@ -64,9 +67,10 @@ public class PlayerMovement : MonoBehaviour
                         layers[i] = raycastHit2Ds[i].collider.gameObject.layer;
                     }
                 }
-                if (layers[0] == 8 || layers[1] == 8 || layers[2] == 8 || layers[3] == 8 || layers[0] == 6 || layers[1] == 6 || layers[2] == 6 || layers[3] == 6 )
+                if (layers[0] == 8 || layers[1] == 8 || layers[2] == 8 || layers[3] == 8 || layers[4] == 8 || layers[0] == 6 || layers[1] == 6 || layers[2] == 6 || layers[3] == 6|| layers[4] == 6 || layers[0] > 9 || layers[1] > 9 || layers[2] > 9 || layers[3] > 9 || layers[4] > 9)
                 {
                     instanceCharacter.transform.position = Vector2.Lerp(instanceCharacter.transform.position, direction, 0.1f);
+                    OnEquipItemEvent?.Invoke(layers[4]);
                 }
                 else
                 {
