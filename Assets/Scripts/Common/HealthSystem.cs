@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,12 +12,15 @@ public class HealthSystem : MonoBehaviour
     public event Action OnDamage;
     public event Action OnHeal;
     public event Action OnDeath;
+
+    public TextMeshPro currentHealthTxt;
+    public TextMeshPro currentArmorTxt;
     
     public int CurrentHealth { get; private set; }
-    public int CurrentMaxArmor { get; private set; }
+    public int CurrentArmor { get; private set; }
 
-    public int MaxHealth => _statsHandler.CurrentStats.maxHealth;
-    public int MaxArmor => _statsHandler.CurrentStats.maxArmor;
+    private int MaxHealth => _statsHandler.CurrentStats.maxHealth;
+    private int MaxArmor => _statsHandler.CurrentStats.maxArmor;
 
     private void Awake()
     {
@@ -26,7 +30,13 @@ public class HealthSystem : MonoBehaviour
     private void Start()
     {
         CurrentHealth = _statsHandler.CurrentStats.maxHealth;
-        CurrentMaxArmor = _statsHandler.CurrentStats.maxArmor;
+        CurrentArmor = _statsHandler.CurrentStats.maxArmor;
+    }
+
+    private void FixedUpdate()
+    {
+        currentHealthTxt.text = CurrentHealth.ToString();
+        currentArmorTxt.text = CurrentArmor.ToString();
     }
 
     public bool ChangeHealth(int change)
