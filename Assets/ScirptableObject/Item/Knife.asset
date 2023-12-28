@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a645e1ba594f4b1c8e7b114240cf820, type: 3}
-  m_Name: Item
+  m_Name: Knife
   m_EditorClassIdentifier: 
-  displayName: 
-  description: 
+  displayName: Sward
+  description: Increases attack power slightly
   type: 0
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: fddd4b1f9d79cea41aace2921b45e607, type: 3}
   dropPrefab: {fileID: 0}
   canStack: 0
   maxStackAmount: 0

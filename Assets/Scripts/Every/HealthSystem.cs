@@ -6,11 +6,14 @@ using UnityEngine.Events;
 
 public class HealthSystem : MonoBehaviour
 {
+    [SerializeField] private float healthChangeDelay = .5f;
+    private float _timeSinceLastChange = float.MaxValue;
+    
     private CharacterStatsHandler _statsHandler;
-
     public event Action OnDamage;
     public event Action OnHeal;
     public event Action OnDeath;
+    public event Action OnInvincibilityEnd;
     
     public int CurrentHealth { get; private set; }
     public int CurrentArmor { get; private set; }
@@ -29,13 +32,25 @@ public class HealthSystem : MonoBehaviour
         CurrentArmor = _statsHandler.CurrentStats.maxArmor;
     }
 
+    private void Update()
+    {
+        if (_timeSinceLastChange < healthChangeDelay)
+        {
+            _timeSinceLastChange += Time.deltaTime;
+            if (_timeSinceLastChange >= healthChangeDelay)
+            {
+                OnInvincibilityEnd?.Invoke();
+            }
+        }
+    }
+
     public bool ChangeHealth(int change)
     {
         if (change == 0)
         {
             return false;
         }
-        
+        _timeSinceLastChange = 0f;
         CurrentHealth += (change - MaxArmor);
         CurrentHealth = CurrentHealth > MaxHealth ? MaxHealth : CurrentHealth;
         CurrentHealth = CurrentHealth < 0 ? 0 : CurrentHealth;

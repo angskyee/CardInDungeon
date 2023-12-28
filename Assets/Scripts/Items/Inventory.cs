@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
@@ -46,7 +47,6 @@ public class Inventory : MonoBehaviour
             uiSlots[i].index = i;
             uiSlots[i].Clear();
         }
-
         ClearSeletecItemWindow();
     }
 
@@ -178,7 +178,7 @@ public class Inventory : MonoBehaviour
             selectedItem.item = null;
             ClearSeletecItemWindow();
         }
-
+        
         UpdateUI();
     }
     

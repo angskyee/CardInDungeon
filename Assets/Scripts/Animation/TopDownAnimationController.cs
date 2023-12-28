@@ -19,13 +19,24 @@ public class TopDownAnimationController : TopDownAnimations
     // Start is called before the first frame update
     void Start()
     {
-        healthSystem.OnDamage += Hit;
-        controller.OnMoved += Move;
+        controller.OnSelectPlayerCharacterCardEvent += Move;
+        controller.OnMoved += OnMoved;
+        
+        if(healthSystem != null)
+        {
+            healthSystem.OnDamage += Hit;
+            healthSystem.OnInvincibilityEnd += InvincibilityEnd;
+        }
     }
 
-    private void Move(bool value)
+    private void Move(GameObject gameObject, Vector2 direction)
     {
-        animator.SetBool(IsWalking, value);
+        animator.SetBool(IsWalking, true);
+    }
+    
+    private void OnMoved()
+    {
+        animator.SetBool(IsWalking, false);
     }
     private void Hit()
     {

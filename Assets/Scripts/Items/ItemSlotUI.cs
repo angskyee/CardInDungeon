@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ItemSlotUI : MonoBehaviour
 {
-    public Image icon;
+    public SpriteRenderer icon;
     public TextMeshPro quatityText;
     private ItemSlot curSlot;
 
@@ -23,11 +24,11 @@ public class ItemSlotUI : MonoBehaviour
     public void Clear()
     {
         curSlot = null;
-        icon.gameObject.SetActive(false);
         quatityText.text = string.Empty;
+        icon.gameObject.SetActive(false);
     }
 
-    public void OnItemClick()
+    public void PlayerContactItem()
     {
         Inventory.instance.SelectItem(index);
     }
