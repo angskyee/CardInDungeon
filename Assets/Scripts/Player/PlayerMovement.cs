@@ -10,7 +10,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private PlayerController _controller;
-    private CharacterContactCardController _contact;
+    private PlayerContactCardController _contact;
     private GameObject _gameObject;
     public GameObject instanceCharacter;
     public GameObject character;
@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void InventoryMovement(Vector2 direction)
     {
-        _contact = GetComponent<CharacterContactCardController>();
+        _contact = GetComponent<PlayerContactCardController>();
         
         if (_contact.ContactInventory)
         {

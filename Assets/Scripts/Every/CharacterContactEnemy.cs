@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterContactEnemy : CharacterContactCardController
+public class PlayerContactEnemy : PlayerContactCardController
 {
     private CharacterStatsHandler EnemyStats;
     private Rigidbody2D _rigidbody;

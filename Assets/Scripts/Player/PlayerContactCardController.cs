@@ -5,7 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class CharacterContactCardController : MonoBehaviour
+public class PlayerContactCardController : MonoBehaviour
 {
     protected Action<GameObject, HealthSystem> OnContactEnemyCard;
 

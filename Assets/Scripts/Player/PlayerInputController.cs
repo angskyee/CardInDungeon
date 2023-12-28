@@ -7,12 +7,12 @@ using UnityEngine.InputSystem;
 public class PlayerInputController : PlayerController
 {
     private Camera _camera;
-    private CharacterContactCardController _contact;
+    private PlayerContactCardController _contact;
 
     private void Awake()
     {
         _camera = Camera.main;
-        _contact = GetComponent<CharacterContactCardController>();
+        _contact = GetComponent<PlayerContactCardController>();
     }
 
     public void OnLook(InputValue value)

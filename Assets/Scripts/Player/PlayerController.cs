@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
         {
             if (hit.collider.CompareTag("Character"))
             {
-                CharacterContactCardController _contact = hit.collider.GetComponent<CharacterContactCardController>();
+                PlayerContactCardController _contact = hit.collider.GetComponent<PlayerContactCardController>();
             
                 if( _contact.ContactEnemy == true && IsClicking == true)
                     OnSelectPlayerCharacterCardEvent?.Invoke(hit.collider.gameObject, direction);

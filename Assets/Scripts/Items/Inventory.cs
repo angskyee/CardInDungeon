@@ -52,7 +52,6 @@ public class Inventory : MonoBehaviour
 
     private void OnInventoryWindowController()
     {
-        Debug.Log("trying");
         if (inventoryWindow.activeSelf)
         {
             inventoryWindow.SetActive(false);
