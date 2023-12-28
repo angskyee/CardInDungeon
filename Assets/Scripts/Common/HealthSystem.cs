@@ -31,9 +31,6 @@ public class HealthSystem : MonoBehaviour
 
     public bool ChangeHealth(int change)
     {
-        Debug.Log(change);
-        Debug.Log(CurrentHealth);
-        
         if (change == 0)
         {
             return false;
@@ -43,7 +40,6 @@ public class HealthSystem : MonoBehaviour
         CurrentHealth = CurrentHealth > MaxHealth ? MaxHealth : CurrentHealth;
         CurrentHealth = CurrentHealth < 0 ? 0 : CurrentHealth;
         
-        Debug.Log("changedHealth"+CurrentHealth);
         if (change > 0)
         {
             OnHeal?.Invoke();
