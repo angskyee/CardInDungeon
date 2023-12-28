@@ -70,12 +70,19 @@ public class PlayerMovement : MonoBehaviour
                 }
                 else
                 {
-                    instanceCharacter.transform.position = character.transform.position;
-                    instanceCharacter.SetActive(false);
-                    character.SetActive(true);
-                    _inventory.inventoryWindow.SetActive(false);
                     isInstance = false;
                     _contact.ContactInventory = false;
+                    while (Vector2.Distance(instanceCharacter.transform.position, character.transform.position) > 0.1f)
+                    {
+                        instanceCharacter.transform.position = Vector2.Lerp(instanceCharacter.transform.position, character.transform.position, 0.00001f);
+                        if(Vector2.Distance(instanceCharacter.transform.position, character.transform.position) < 0.2f)
+                        {
+                            instanceCharacter.SetActive(false);
+                            character.SetActive(true);
+                            _inventory.inventoryWindow.SetActive(false);
+                        }
+                    }
+
                 }
             }
         }
