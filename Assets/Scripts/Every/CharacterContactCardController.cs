@@ -1,13 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CharacterContactCardController : MonoBehaviour
 {
     protected Action<GameObject, HealthSystem> OnContactEnemyCard;
 
-    public bool ConttactEnemy;
+    [FormerlySerializedAs("ConttactEnemy")] public bool ContactEnemy;
+    public bool ContactInventory;
+    
     private float attackDeray;
     protected HealthSystem _healthSystem;
     private HealthSystem _collidingTargetHealthSystem;
@@ -22,14 +26,19 @@ public class CharacterContactCardController : MonoBehaviour
         _healthSystem = GetComponent<HealthSystem>();
     }
 
+    private void Start()
+    {
+        ContactInventory = false;
+    }
+
     private void FixedUpdate()
     {
-        if (ConttactEnemy == false && attackDeray < Stats.CurrentStats.attackSO.speed + 10.0f)
+        if (ContactEnemy == false && attackDeray < Stats.CurrentStats.attackSO.speed + 10.0f)
         {
             attackDeray += Time.fixedDeltaTime;
             if (attackDeray > Stats.CurrentStats.attackSO.speed)
             {
-                ConttactEnemy = true;
+                ContactEnemy = true;
                 attackDeray = 0.0f;
             }
         }
@@ -39,11 +48,16 @@ public class CharacterContactCardController : MonoBehaviour
     {
         _enemyGameObject = collision.gameObject;
 
-        if (_enemyGameObject.layer == LayerMask.NameToLayer("Enemy") && ConttactEnemy)
+        if (_enemyGameObject.layer == LayerMask.NameToLayer("Enemy") && ContactEnemy)
         {
             _collidingTargetHealthSystem = _enemyGameObject.GetComponent<HealthSystem>();
             CallOnContactEnemyCard(_enemyGameObject,_collidingTargetHealthSystem);
-            ConttactEnemy = false;
+            ContactEnemy = false;
+        }
+        else if (_enemyGameObject.layer == LayerMask.NameToLayer("Inventory"))
+        {
+            ContactInventory = true;
+            Debug.Log("IsInventory");
         }
     }
 

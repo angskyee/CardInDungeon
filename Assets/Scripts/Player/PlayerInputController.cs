@@ -7,16 +7,21 @@ using UnityEngine.InputSystem;
 public class PlayerInputController : PlayerController
 {
     private Camera _camera;
+    private CharacterContactCardController _contact;
 
     private void Awake()
     {
         _camera = Camera.main;
+        _contact = GetComponent<CharacterContactCardController>();
     }
 
     public void OnLook(InputValue value)
     {
         Vector2 mouseAim = _camera.ScreenToWorldPoint(value.Get<Vector2>());
+        if(_contact.ContactInventory != true)
         CallSelectCardEvent(mouseAim);
+        else
+        CallInventoryLook(mouseAim);
     }
 
     public void OnClick(InputValue value)
