@@ -7,7 +7,6 @@ public class CharacterContactEnemy : CharacterContactCardController
 {
     private CharacterStatsHandler EnemyStats;
     private Rigidbody2D _rigidbody;
-    private float deceleration = 1f;
 
     protected override void Awake()
     {
