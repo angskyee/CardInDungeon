@@ -19,10 +19,9 @@ public class CharacterContactEnemy : CharacterContactCardController
     private void OnDamage(GameObject enemyGameObject, HealthSystem enemyHealthSystem)
     {
         EnemyStats = enemyGameObject.GetComponent<CharacterStatsHandler>();
-        Debug.Log(-Stats.CurrentStats.attackSO.power);
+
         _healthSystem.ChangeHealth(-EnemyStats.CurrentStats.attackSO.power);
         enemyHealthSystem.ChangeHealth(-Stats.CurrentStats.attackSO.power);
-        Debug.Log("after"+ -Stats.CurrentStats.attackSO.power);
         
         OnKnockBack(enemyGameObject, EnemyStats);
     }

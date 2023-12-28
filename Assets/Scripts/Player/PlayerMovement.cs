@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        _controller.OnSelectCardEvent += Move;
+        _controller.OnSelectPlayerCardEvent += Move;
     }
 
     private void Move(GameObject obj, Vector2 direction)

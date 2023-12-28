@@ -5,21 +5,24 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public event Action<GameObject, Vector2> OnSelectCardEvent;
-    
+    public event Action<GameObject, Vector2> OnSelectPlayerCardEvent;
     protected bool IsClicking { get; set; }
 
     public void CallSelectCardEvent(Vector2 direction)
     {
         RaycastHit2D hit = Physics2D.Raycast(direction, Vector2.zero, 0f);
 
+
         if (IsClicking == false || hit.collider == null)
         {
             return;
         }
-        if (hit.collider && IsClicking == true)
+        if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            OnSelectCardEvent?.Invoke(hit.collider.gameObject, direction);
+            CharacterContactCardController _contact = hit.collider.GetComponent<CharacterContactCardController>();
+            
+            if( _contact.ConttactEnemy == true && IsClicking == true)
+            OnSelectPlayerCardEvent?.Invoke(hit.collider.gameObject, direction);
         }
     }
 }

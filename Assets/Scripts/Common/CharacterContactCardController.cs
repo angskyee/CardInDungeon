@@ -7,7 +7,7 @@ public class CharacterContactCardController : MonoBehaviour
 {
     protected Action<GameObject, HealthSystem> OnContactEnemyCard;
 
-    private bool ConttactEnemy;
+    public bool ConttactEnemy;
     private float attackDeray;
     protected HealthSystem _healthSystem;
     private HealthSystem _collidingTargetHealthSystem;
