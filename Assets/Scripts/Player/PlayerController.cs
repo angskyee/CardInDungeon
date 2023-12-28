@@ -6,15 +6,17 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public event Action<GameObject, Vector2> OnSelectPlayerCharacterCardEvent;
+    public event Action<bool> OnMoved;
     public event Action OnSelectPlayerInventoryCardEvent;
     public event Action<Vector2> OnInventoryMove;
     protected bool IsClicking { get; set; }
+
+    public bool IsMove = false;
 
     public void CallSelectCardEvent(Vector2 direction)
     {
         
         RaycastHit2D hit = Physics2D.Raycast(direction, Vector2.zero, 0f);
-
 
         if (IsClicking == false || hit.collider == null)
         {
@@ -25,13 +27,21 @@ public class PlayerController : MonoBehaviour
             if (hit.collider.CompareTag("Character"))
             {
                 PlayerContactCardController _contact = hit.collider.GetComponent<PlayerContactCardController>();
-            
-                if( _contact.ContactEnemy == true && IsClicking == true)
+
+                if (_contact.ContactEnemy == true && IsClicking == true)
+                {
+                    IsMove = true;
                     OnSelectPlayerCharacterCardEvent?.Invoke(hit.collider.gameObject, direction);
+                    OnMoved?.Invoke(IsMove);
+                }
+                else
+                {
+                    IsMove = false;
+                    OnMoved?.Invoke(IsMove);
+                }
             }
             else if(hit.collider.CompareTag("Inventory"))
             { 
-                Debug.Log("Inventoty");
                 OnSelectPlayerInventoryCardEvent?.Invoke();
             }
             

@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 
 public class PlayerContactCardController : MonoBehaviour
 {
-    protected Action<GameObject, HealthSystem> OnContactEnemyCard;
+    public Action<GameObject, HealthSystem> OnContactEnemyCard;
 
     [FormerlySerializedAs("ConttactEnemy")] public bool ContactEnemy;
     public bool ContactInventory;

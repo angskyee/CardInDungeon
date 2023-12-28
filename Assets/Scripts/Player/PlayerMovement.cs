@@ -72,24 +72,37 @@ public class PlayerMovement : MonoBehaviour
                 {
                     isInstance = false;
                     _contact.ContactInventory = false;
-                    while (Vector2.Distance(instanceCharacter.transform.position, character.transform.position) > 0.1f)
-                    {
-                        instanceCharacter.transform.position = Vector2.Lerp(instanceCharacter.transform.position, character.transform.position, 0.00001f);
-                        if(Vector2.Distance(instanceCharacter.transform.position, character.transform.position) < 0.2f)
-                        {
-                            instanceCharacter.SetActive(false);
-                            character.SetActive(true);
-                            _inventory.inventoryWindow.SetActive(false);
-                        }
-                    }
 
+                    StartCoroutine(SlowMove());
                 }
+            }
+        }
+    }
+
+    private IEnumerator SlowMove()
+    {
+        float lerpTime = 0f;
+        float duration = 2f; // 이동에 걸리는 전체 시간
+
+        while (lerpTime < 1f)
+        {
+            lerpTime += Time.deltaTime / duration;
+            instanceCharacter.transform.position = Vector2.Lerp(instanceCharacter.transform.position, character.transform.position, lerpTime);
+
+            yield return null; // 한 프레임 대기
+            
+            if (Vector2.Distance(instanceCharacter.transform.position, character.transform.position) < 0.1f)
+            {
+                instanceCharacter.SetActive(false);
+                character.SetActive(true);
+                _inventory.inventoryWindow.SetActive(false);
+                break;
             }
         }
     }
 
     private void Move(GameObject obj, Vector2 direction)
     {
-        obj.transform.position = direction;
+        obj.transform.position = Vector2.Lerp(obj.transform.position, direction, 0.1f);
     }
 }
