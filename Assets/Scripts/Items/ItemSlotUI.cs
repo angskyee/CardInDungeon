@@ -12,29 +12,9 @@ public class ItemSlotUI : MonoBehaviour
     public TextMeshPro quatityText;
     public int index;
     private ItemSlot curSlot;
-    private PlayerMovement _movement;
-    private PlayerInputController _controller;
-    private bool isClick;
+
     
     public bool equipped;
-
-    private void Awake()
-    {
-        isClick = false;
-        _movement = GetComponent<PlayerMovement>();
-        _controller = GetComponent<PlayerInputController>();
-    }
-
-    private void Start()
-    {
-        _movement.OnEquipItemEvent += PlayerContactItem;
-        _controller.OnClickEvent += Click;
-    }
-
-    private void Click(bool value)
-    {
-        isClick = value;
-    }
 
     public void Set(ItemSlot slot)
     {
@@ -49,11 +29,5 @@ public class ItemSlotUI : MonoBehaviour
         curSlot = null;
         quatityText.text = string.Empty;
         icon.gameObject.SetActive(false);
-    }
-
-    public void PlayerContactItem(int value)
-    {
-        if(value > 9 && isClick)
-        Inventory.instance.SelectItem(value - 10);
     }
 }

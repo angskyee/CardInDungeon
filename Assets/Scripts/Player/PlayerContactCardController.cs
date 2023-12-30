@@ -11,24 +11,32 @@ public class PlayerContactCardController : MonoBehaviour
 
     [FormerlySerializedAs("ConttactEnemy")] public bool ContactEnemy;
     public bool ContactInventory;
-    
+    private bool IsClick;
     private float attackDeray;
-    protected HealthSystem _healthSystem;
-    private HealthSystem _collidingTargetHealthSystem;
+    
     protected Transform _direction;
     private GameObject _enemyGameObject;
+    
+    private HealthSystem _collidingTargetHealthSystem;
+    private PlayerMovement _movement;
+    private PlayerController _controller;
+    protected HealthSystem _healthSystem;
     protected CharacterStatsHandler Stats { get; private set; }
 
     protected virtual void Awake()
     {
+        IsClick = false;
         Stats = GetComponent<CharacterStatsHandler>();
+        _controller = GetComponent<PlayerController>();
         _direction = GetComponent<Transform>();
         _healthSystem = GetComponent<HealthSystem>();
+        _movement = GetComponent<PlayerMovement>();
     }
 
     private void Start()
     {
         ContactInventory = false;
+        _movement.OnEquipItemEvent += PlayerContactItem;
     }
 
     private void FixedUpdate()
@@ -64,5 +72,12 @@ public class PlayerContactCardController : MonoBehaviour
     private void CallOnContactEnemyCard(GameObject enemyGameObject, HealthSystem collidingTargetHealthSystem)
     {
         OnContactEnemyCard?.Invoke(enemyGameObject, collidingTargetHealthSystem);
+    }
+    
+    public void PlayerContactItem(int value)
+    {
+        Debug.Log(value);
+        if(value > 9 && IsClick)
+            Inventory.instance.SelectItem(value - 10);
     }
 }

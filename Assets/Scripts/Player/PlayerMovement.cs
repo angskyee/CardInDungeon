@@ -67,10 +67,15 @@ public class PlayerMovement : MonoBehaviour
                         layers[i] = raycastHit2Ds[i].collider.gameObject.layer;
                     }
                 }
+
                 if (layers[0] == 8 || layers[1] == 8 || layers[2] == 8 || layers[3] == 8 || layers[4] == 8 || layers[0] == 6 || layers[1] == 6 || layers[2] == 6 || layers[3] == 6|| layers[4] == 6 || layers[0] > 9 || layers[1] > 9 || layers[2] > 9 || layers[3] > 9 || layers[4] > 9)
                 {
                     instanceCharacter.transform.position = Vector2.Lerp(instanceCharacter.transform.position, direction, 0.1f);
-                    OnEquipItemEvent?.Invoke(layers[4]);
+                    bool TagToInt = int.TryParse(raycastHit2Ds[4].collider.gameObject.tag, out int result);
+                    if (TagToInt)
+                    {
+                        OnEquipItemEvent?.Invoke(result);
+                    }
                 }
                 else
                 {

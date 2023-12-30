@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputController : PlayerController
 {
-    public event Action<bool> OnClickEvent;
     
     private Camera _camera;
     private PlayerContactCardController _contact;
@@ -29,6 +28,5 @@ public class PlayerInputController : PlayerController
     public void OnClick(InputValue value)
     {
         IsClicking = value.isPressed;
-        OnClickEvent?.Invoke(IsClicking);
     }
 }
